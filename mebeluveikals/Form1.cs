@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using System.ComponentModel.DataAnnotations;
 
 namespace mebeluveikals
 {
@@ -11,6 +12,16 @@ namespace mebeluveikals
             InitializeComponent();
 
             furnitureManager = new FurnitureManager("Data Source=furniture.db");
+
+            var furniture = furnitureManager.ReadFurniture();
+            var furnitureNames = new List<string>();
+
+            foreach (var f in furniture)
+            {
+                furnitureNames.Add(f.Name);
+            }
+
+            selectProductComboBox.DataSource = furnitureNames;
         }
 
         private void selectBtn_Click(object sender, EventArgs e)
