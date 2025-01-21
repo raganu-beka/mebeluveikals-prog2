@@ -230,6 +230,30 @@
             Text = "Mēbeļu veikals";
             ResumeLayout(false);
             PerformLayout();
+
+
+            // Eksportēt CSV poga
+            Button exportCsvButton = new Button();
+            exportCsvButton.Location = new Point(255, 298);
+            exportCsvButton.Name = "exportCsvButton";
+            exportCsvButton.Size = new Size(100, 24);
+            exportCsvButton.TabIndex = 18;
+            exportCsvButton.Text = "Eksportēt CSV";
+            exportCsvButton.UseVisualStyleBackColor = true;
+            exportCsvButton.Click += exportCsvButton_Click;
+            Controls.Add(exportCsvButton);
+            
+            // Importēt CSV poga
+            Button importCsvButton = new Button();
+            importCsvButton.Location = new Point(365, 298);
+            importCsvButton.Name = "importCsvButton";
+            importCsvButton.Size = new Size(100, 24);
+            importCsvButton.TabIndex = 19;
+            importCsvButton.Text = "Importēt CSV";
+            importCsvButton.UseVisualStyleBackColor = true;
+            importCsvButton.Click += importCsvButton_Click;
+            Controls.Add(importCsvButton);
+
         }
 
         #endregion
