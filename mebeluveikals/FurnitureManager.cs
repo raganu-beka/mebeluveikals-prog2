@@ -16,6 +16,21 @@ namespace mebeluveikals
         }
 
 
+        public void DeleteFurnitureByName(string name)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                var deleteCmd = connection.CreateCommand();
+                deleteCmd.CommandText = @"DELETE FROM Furniture WHERE Name = @name";
+                deleteCmd.Parameters.AddWithValue("name", name);
+
+                deleteCmd.ExecuteNonQuery();
+            }
+        }
+
+
         public Furniture ReadFurnitureByName(string name)
         {
             using (var connection = new SqliteConnection(connectionString))

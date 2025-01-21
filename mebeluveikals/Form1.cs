@@ -26,7 +26,14 @@ namespace mebeluveikals
 
         private void selectBtn_Click(object sender, EventArgs e)
         {
+            var furniture = furnitureManager.ReadFurnitureByName(selectProductComboBox.Text);
 
+            nameTextBox.Text = furniture.Name;
+            descTextBox.Text = furniture.Description;
+            priceTextBox.Text = furniture.Price.ToString();
+            hTextBox.Text = furniture.Height.ToString();
+            wTextBox.Text = furniture.Width.ToString();
+            lTextBox.Text = furniture.Length.ToString();
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -63,14 +70,35 @@ namespace mebeluveikals
                     Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(hTextBox.Text),
                     Convert.ToInt32(wTextBox.Text), Convert.ToInt32(lTextBox.Text));
 
+                List<string> furnitureList = (List<string>)selectProductComboBox.DataSource;
+                furnitureList.Add(nameTextBox.Text);
+
+                selectProductComboBox.DataSource = null;
+                selectProductComboBox.DataSource = furnitureList;
+
                 MessageBox.Show("Ieraksts tika pievienots datubāzei");
             }
             catch (SqliteException ex)
             {
                 MessageBox.Show("Notikusi SQL kļūda.");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("Notikusi kļūda.");
             }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            furnitureManager.DeleteFurnitureByName(selectProductComboBox.Text);
+
+            List<string> furnitureList = (List<string>)selectProductComboBox.DataSource;
+            furnitureList.Remove(selectProductComboBox.Text);
+
+            selectProductComboBox.DataSource = null;
+            selectProductComboBox.DataSource = furnitureList;
+
+            MessageBox.Show("Mēbele tika izdzēsta no datubāzes.");
         }
     }
 }

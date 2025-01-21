@@ -50,6 +50,7 @@
             // 
             // selectProductComboBox
             // 
+            selectProductComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             selectProductComboBox.FormattingEnabled = true;
             selectProductComboBox.Location = new Point(12, 38);
             selectProductComboBox.Name = "selectProductComboBox";
@@ -198,6 +199,7 @@
             deleteBtn.TabIndex = 17;
             deleteBtn.Text = "Dzēst";
             deleteBtn.UseVisualStyleBackColor = true;
+            deleteBtn.Click += deleteBtn_Click;
             // 
             // Form1
             // 
