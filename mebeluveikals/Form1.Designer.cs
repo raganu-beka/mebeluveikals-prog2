@@ -46,6 +46,8 @@
             addButton = new Button();
             editBtn = new Button();
             deleteBtn = new Button();
+            importBtn = new Button();
+            exportBtn = new Button();
             SuspendLayout();
             // 
             // selectProductComboBox
@@ -174,7 +176,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(12, 298);
+            addButton.Location = new Point(12, 284);
             addButton.Name = "addButton";
             addButton.Size = new Size(75, 24);
             addButton.TabIndex = 15;
@@ -184,7 +186,7 @@
             // 
             // editBtn
             // 
-            editBtn.Location = new Point(93, 298);
+            editBtn.Location = new Point(93, 284);
             editBtn.Name = "editBtn";
             editBtn.Size = new Size(75, 24);
             editBtn.TabIndex = 16;
@@ -193,7 +195,7 @@
             // 
             // deleteBtn
             // 
-            deleteBtn.Location = new Point(174, 298);
+            deleteBtn.Location = new Point(174, 284);
             deleteBtn.Name = "deleteBtn";
             deleteBtn.Size = new Size(75, 24);
             deleteBtn.TabIndex = 17;
@@ -201,11 +203,32 @@
             deleteBtn.UseVisualStyleBackColor = true;
             deleteBtn.Click += deleteBtn_Click;
             // 
+            // importBtn
+            // 
+            importBtn.Location = new Point(12, 314);
+            importBtn.Name = "importBtn";
+            importBtn.Size = new Size(105, 24);
+            importBtn.TabIndex = 18;
+            importBtn.Text = "Importēt CSV";
+            importBtn.UseVisualStyleBackColor = true;
+            // 
+            // exportBtn
+            // 
+            exportBtn.Location = new Point(123, 314);
+            exportBtn.Name = "exportBtn";
+            exportBtn.Size = new Size(105, 24);
+            exportBtn.TabIndex = 19;
+            exportBtn.Text = "Exportēt CSV";
+            exportBtn.UseVisualStyleBackColor = true;
+            exportBtn.Click += exportBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(443, 354);
+            Controls.Add(exportBtn);
+            Controls.Add(importBtn);
             Controls.Add(deleteBtn);
             Controls.Add(editBtn);
             Controls.Add(addButton);
@@ -252,5 +275,7 @@
         private Button addButton;
         private Button editBtn;
         private Button deleteBtn;
+        private Button importBtn;
+        private Button exportBtn;
     }
 }

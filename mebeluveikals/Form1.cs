@@ -1,4 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace mebeluveikals
@@ -14,7 +17,8 @@ namespace mebeluveikals
             furnitureManager = new FurnitureManager("Data Source=furniture.db");
 
             var furniture = furnitureManager.ReadFurniture();
-            var furnitureNames = new List<string>();
+
+            var furnitureNames = furniture.Select(x => x.Name).ToList();
 
             foreach (var f in furniture)
             {
@@ -22,6 +26,8 @@ namespace mebeluveikals
             }
 
             selectProductComboBox.DataSource = furnitureNames;
+
+            furnitureManager.ExportToCsv("D:\\Files\\fails.csv");
         }
 
         private void selectBtn_Click(object sender, EventArgs e)
@@ -99,6 +105,22 @@ namespace mebeluveikals
             selectProductComboBox.DataSource = furnitureList;
 
             MessageBox.Show("Mēbele tika izdzēsta no datubāzes.");
+        }
+
+        private void exportBtn_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrEmpty(fbd.SelectedPath))
+                {
+                    var fileName = Guid.NewGuid().ToString() + ".csv";
+                    furnitureManager.ExportToCsv(fbd.SelectedPath + "\\" + fileName);
+
+                    MessageBox.Show("Fails saglābāts!");
+                }
+            }
         }
     }
 }

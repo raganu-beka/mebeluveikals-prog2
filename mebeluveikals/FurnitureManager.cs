@@ -134,5 +134,23 @@ namespace mebeluveikals
                 createTableCommand.ExecuteNonQuery();
             }
         }
+
+        public void ExportToCsv(string pathToCsv)
+        {
+            var furniture = ReadFurniture();
+
+
+            using(var w = new StreamWriter(pathToCsv))
+            {
+                w.WriteLine("Name;Description;Price;Height;Width;Length");
+
+                foreach (var f in furniture)
+                {
+                    w.WriteLine($"{f.Name};{f.Description};{f.Price};{f.Height};'{f.Width};{f.Length}");
+                }
+
+                w.Flush();
+            }
+        }
     }
 }
