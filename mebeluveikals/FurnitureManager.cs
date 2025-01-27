@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Diagnostics;
+using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
 
 
@@ -113,6 +115,30 @@ namespace mebeluveikals
             }
         }
 
+        public void UpdateFurniture(Furniture furniture)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                var updateRecordCommand = connection.CreateCommand();
+                updateRecordCommand.CommandText = @"UPDATE Furniture
+                SET Price=@price, Description=@description,
+                Height=@height,Width=@width,Length=@length
+                WHERE Name=@name"
+                ;
+
+                updateRecordCommand.Parameters.AddWithValue("name", furniture.Name);
+                updateRecordCommand.Parameters.AddWithValue("description", furniture.Description);
+                updateRecordCommand.Parameters.AddWithValue("price", furniture.Price);
+                updateRecordCommand.Parameters.AddWithValue("height", furniture.Height);
+                updateRecordCommand.Parameters.AddWithValue("width", furniture.Width);
+                updateRecordCommand.Parameters.AddWithValue("length", furniture.Length);
+
+                updateRecordCommand.ExecuteNonQuery();
+            }
+        }
+
         private void CreateFurnitureTable()
         {
             using (var connection = new SqliteConnection(connectionString))
@@ -146,7 +172,7 @@ namespace mebeluveikals
 
                 foreach (var f in furniture)
                 {
-                    w.WriteLine($"{f.Name};{f.Description};{f.Price};{f.Height};'{f.Width};{f.Length}");
+                    w.WriteLine($"{f.Name};{f.Description};{f.Price};{f.Height};{f.Width};{f.Length}");
                 }
 
                 w.Flush();
