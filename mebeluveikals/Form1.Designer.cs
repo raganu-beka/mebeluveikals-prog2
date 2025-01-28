@@ -192,6 +192,7 @@
             editBtn.TabIndex = 16;
             editBtn.Text = "Rediģēt";
             editBtn.UseVisualStyleBackColor = true;
+            editBtn.Click += editBtn_Click;
             // 
             // deleteBtn
             // 
@@ -211,6 +212,7 @@
             importBtn.TabIndex = 18;
             importBtn.Text = "Importēt CSV";
             importBtn.UseVisualStyleBackColor = true;
+            importBtn.Click += importBtn_Click;
             // 
             // exportBtn
             // 

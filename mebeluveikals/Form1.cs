@@ -122,5 +122,30 @@ namespace mebeluveikals
                 }
             }
         }
+
+        private void editBtn_Click(object sender, EventArgs e)
+        {
+            var furniture = new Furniture(nameTextBox.Text, descTextBox.Text,
+                Convert.ToDouble(priceTextBox.Text), Convert.ToInt32(hTextBox.Text),
+                Convert.ToInt32(wTextBox.Text), Convert.ToInt32(lTextBox.Text));
+            furnitureManager.UpdateFurniture(furniture);
+
+
+            MessageBox.Show("Ieraksts tika atjaunots");
+        }
+
+        private void importBtn_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = openFileDialog.FileName;
+
+                    MessageBox.Show(filePath);
+                }
+            }
+        }
     }
 }
