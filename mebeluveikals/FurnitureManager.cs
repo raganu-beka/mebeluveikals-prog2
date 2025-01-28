@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.Xml.Linq;
 using Microsoft.Data.Sqlite;
+using System.Windows.Markup;
 
 
 namespace mebeluveikals
@@ -176,6 +179,41 @@ namespace mebeluveikals
                 }
 
                 w.Flush();
+            }
+        }
+
+        public void ImportFromCsv(string pathToCsv)
+        {
+            var furnitures = ReadFurniture();
+            var furnitureNames = furnitures.Select(x => x.Name).ToList();
+
+            string? line;
+            using (var r = new StreamReader(pathToCsv))
+            {
+                r.ReadLine();
+
+                while ((line = r.ReadLine()) != null)
+                {
+                    string[] values = line.Split(';');
+                    
+                    var name = values[0];
+                    var description = values[1];
+                    var price = Convert.ToDouble(values[2]);
+                    var height = Convert.ToInt32(values[3]);
+                    var width = Convert.ToInt32(values[4]);
+                    var length = Convert.ToInt32(values[5]);
+
+
+                    if (furnitureNames.Contains(name))
+                    {
+                        var furniture = new Furniture(name, description, price,
+                            height, width, length);
+                        UpdateFurniture(furniture);
+                    } else
+                    {
+                        AddFurniture(name, description, price, height, width, length);
+                    }
+                }
             }
         }
     }

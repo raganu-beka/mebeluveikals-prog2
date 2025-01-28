@@ -26,8 +26,6 @@ namespace mebeluveikals
             }
 
             selectProductComboBox.DataSource = furnitureNames;
-
-            furnitureManager.ExportToCsv("D:\\Files\\fails.csv");
         }
 
         private void selectBtn_Click(object sender, EventArgs e)
@@ -142,8 +140,9 @@ namespace mebeluveikals
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var filePath = openFileDialog.FileName;
+                    furnitureManager.ImportFromCsv(filePath);
 
-                    MessageBox.Show(filePath);
+
                 }
             }
         }
